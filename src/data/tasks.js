@@ -1,8 +1,19 @@
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
-export const tasks = ref([]);
+const key = "task_list";
+const savedTasks = localStorage.getItem(key);
+export const tasks = ref(savedTasks ? JSON.parse(savedTasks) : []);
 
-let nextId = 1;
+let nextId =
+    tasks.value.length > 0 ? Math.max(...tasks.value.map((t) => t.id)) + 1 : 1;
+
+watch(
+    tasks,
+    (newTask) => {
+        localStorage.setItem(key, JSON.stringify(newTask));
+    },
+    { deep: true },
+);
 
 export function addTask(taskTitle) {
     tasks.value.push({

@@ -21,7 +21,7 @@ import { RouterView } from "vue-router";
     width: 800px;
     max-width: 100%;
     min-width: 500px;
-    min-height: 80vh;
+    height: 80vh;
     padding: 2rem;
     background: #f1f5f9;
     color: #1e293b;
